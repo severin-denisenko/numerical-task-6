@@ -42,22 +42,22 @@ void solve(matrix &mx, vector &res)
     size_type n = mx.size();
     vector_int x_order = vector_int(n);
 
-    for (int i = 0; i < n; i++)
+    for (size_type i = 0; i < n; i++)
     {
         x_order[i] = i;
     }
 
-    for (int j = 0; j < n; j++)
+    for (size_type j = 0; j < n; j++)
     {
         // Serch for biggest element and change order //
 
-        int max_i = 0;
-        int max_j = 0;
+        size_type max_i = 0;
+        size_type max_j = 0;
         double max = 0;
 
-        for (int z = j; z < n; z++)
+        for (size_type z = j; z < n; z++)
         {
-            for (int t = j; t < n; t++)
+            for (size_type t = j; t < n; t++)
             {
                 if (fabs(mx[z][t]) > max)
                 {
@@ -68,7 +68,7 @@ void solve(matrix &mx, vector &res)
             }
         }
 
-        for (int i = 0; i < n; i++)
+        for (size_type i = 0; i < n; i++)
         {
             std::swap(mx[i][max_j], mx[i][j]);
         }
@@ -77,11 +77,11 @@ void solve(matrix &mx, vector &res)
 
         ////////////////////////////////////////////////
 
-        for (int i = j + 1; i < n; i++)
+        for (size_type i = j + 1; i < n; i++)
         {
             double div = mx[i][j] / mx[j][j];
 
-            for (int k = 0; k < n + 1; k++)
+            for (size_type k = 0; k < n + 1; k++)
             {
                 mx[i][k] = mx[i][k] - div * mx[j][k];
             }
@@ -93,7 +93,7 @@ void solve(matrix &mx, vector &res)
     for (int i = (int)n - 2; i >= 0; i--)
     {
         double sum = 0;
-        for (int j = i + 1; j < n; j++)
+        for (int j = i + 1; j < (int)n; j++)
         {
             sum = sum + mx[i][j] * res[j];
         }
@@ -102,16 +102,16 @@ void solve(matrix &mx, vector &res)
 
     // Restore the order of res //
 
-    for (int i = 0; i < n; i++) {
-        int next = i;
+    for (size_type i = 0; i < n; i++) {
+        size_type next = i;
 
-        while (x_order[next] >= 0) {
+        while (x_order[next] != n) {
 
             std::swap(res[i], res[x_order[next]]);
 
-            int temp = x_order[next];
+            size_type temp = x_order[next];
 
-            x_order[next] -= (int)n;
+            x_order[next] = n;
             next = temp;
         }
     }

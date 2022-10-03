@@ -12,7 +12,7 @@
 typedef std::vector<double> vector;
 typedef std::vector<std::vector<double>> matrix;
 typedef vector::size_type size_type;
-typedef std::vector<int> vector_int;
+typedef std::vector<size_type> vector_int;
 typedef vector (*function)(const vector &input);
 
 
